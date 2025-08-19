@@ -1,0 +1,6 @@
+artifact_location: file:///c:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/models/mlruns/829804759602383550
+creation_time: 1755571793758
+experiment_id: '829804759602383550'
+last_update_time: 1755571793758
+lifecycle_stage: active
+name: toxic_comment_moderation

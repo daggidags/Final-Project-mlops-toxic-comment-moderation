@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/models/mlruns/829804759602383550/14478bfe3e544a2bb169922ee5670ded/artifacts
+end_time: 1755571884096
+entry_point_name: ''
+experiment_id: '829804759602383550'
+lifecycle_stage: active
+run_id: 14478bfe3e544a2bb169922ee5670ded
+run_name: honorable-fox-499
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755571873631
+status: 3
+tags: []
+user_id: angel

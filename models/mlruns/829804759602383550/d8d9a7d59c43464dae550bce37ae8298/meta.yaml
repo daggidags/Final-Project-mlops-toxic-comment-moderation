@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/models/mlruns/829804759602383550/d8d9a7d59c43464dae550bce37ae8298/artifacts
+end_time: 1755571809427
+entry_point_name: ''
+experiment_id: '829804759602383550'
+lifecycle_stage: active
+run_id: d8d9a7d59c43464dae550bce37ae8298
+run_name: judicious-cod-921
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755571796357
+status: 4
+tags: []
+user_id: angel
