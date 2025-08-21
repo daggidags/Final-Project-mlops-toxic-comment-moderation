@@ -1,0 +1,14 @@
+artifact_uri: file:///c:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/src/mlruns/473137756126549041/0097ec995ee24ee0835ba6ab7808fe73/artifacts
+end_time: 1755654868645
+entry_point_name: ''
+experiment_id: '473137756126549041'
+lifecycle_stage: active
+run_id: 0097ec995ee24ee0835ba6ab7808fe73
+run_name: bright-foal-724
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755654852167
+status: 3
+tags: []
+user_id: angel

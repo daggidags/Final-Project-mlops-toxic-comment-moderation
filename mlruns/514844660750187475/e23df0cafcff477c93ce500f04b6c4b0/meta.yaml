@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/e23df0cafcff477c93ce500f04b6c4b0/artifacts
+end_time: 1755656276928
+entry_point_name: ''
+experiment_id: '514844660750187475'
+lifecycle_stage: active
+run_id: e23df0cafcff477c93ce500f04b6c4b0
+run_name: placid-shoat-491
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755656263245
+status: 3
+tags: []
+user_id: angel

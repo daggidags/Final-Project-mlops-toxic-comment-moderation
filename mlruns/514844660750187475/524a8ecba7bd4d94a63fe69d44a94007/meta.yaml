@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/524a8ecba7bd4d94a63fe69d44a94007/artifacts
+end_time: 1755736642478
+entry_point_name: ''
+experiment_id: '514844660750187475'
+lifecycle_stage: active
+run_id: 524a8ecba7bd4d94a63fe69d44a94007
+run_name: capricious-tern-132
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1755736626081
+status: 3
+tags: []
+user_id: angel
