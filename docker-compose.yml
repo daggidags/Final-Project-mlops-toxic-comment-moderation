@@ -1,0 +1,22 @@
+services:
+  toxicity-api:
+    build: ./api
+    container_name: toxicity-api
+    ports:
+      - "8000:8000"
+    volumes:
+      - toxicity_logs:/logs
+
+  toxicity-monitor:
+    build: ./monitoring
+    container_name: toxicity-monitor
+    ports:
+      - "8501:8501"
+    volumes:
+      - toxicity_logs:/logs
+    command: streamlit run monitor.py --server.port=8501 --server.address=0.0.0.0
+    depends_on:
+      - toxicity-api
+
+volumes:
+  toxicity_logs:

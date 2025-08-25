@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/models/m-c9234f3383af4dc2beae10c474bc0218/artifacts
+creation_timestamp: 1756077361308
+experiment_id: '514844660750187475'
+last_updated_timestamp: 1756077368960
+model_id: m-c9234f3383af4dc2beae10c474bc0218
+model_type: null
+name: model
+source_run_id: 68f44c7a79fa41d0a7fc31a5c8d1eab3
+status: 2
+status_message: null

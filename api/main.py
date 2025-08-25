@@ -14,7 +14,7 @@ app = FastAPI(
 )
 
 # Load trained model
-model_path = Path(__file__).resolve().parent / "sentiment_model.pkl"
+model_path = Path(__file__).resolve().parent / "toxicity_model.pkl"
 if not model_path.exists():
     raise FileNotFoundError(f"Model file not found: {model_path}")
 model = joblib.load(model_path)
