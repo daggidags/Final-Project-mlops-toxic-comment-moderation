@@ -74,7 +74,7 @@ Returns:
 
 ### Running the System with Docker
 
-1. Build the Containers
+ Build the Containers
 
    ```bash
    docker-compose build --no-cache
@@ -97,7 +97,7 @@ Streamlit Dashboard → http://localhost:8501
 
 ### Hosting on AWS EC2 
 
-This project has also been connected to an **AWS EC2 instance**.
+This project has also been connected to an **AWS EC2 instance** and **AWS RDS Database**.
 
 #### Steps to Deploy:
 
@@ -124,3 +124,13 @@ This project has also been connected to an **AWS EC2 instance**.
 *FastAPI* → http://<ec2-public-ip>:8000/docs
 
 *Streamlit Dashboard* → http://<ec2-public-ip>:8501
+7. **Access the AWS RDS Database**
+   ```bash
+  psql -h toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com -U postgres -p 5432
+   ```
+8. **Access the EC2 instance in Bash**
+   ```bash
+  ssh-keygen -t rsa -b 4096 -C "github-actions"
+  scp -i toxicity-key.pem -r ~/ ec2-user@44.210.126.9:/home/ec2-user/
+   ```
+
