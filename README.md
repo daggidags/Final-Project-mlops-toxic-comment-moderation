@@ -61,14 +61,14 @@ Example:
 ```json
 {
   "text": "It is a lovely day!",
-  "true_sentiment": 0          # non-toxic comment 
+  "true_status": 0          # non-toxic comment 
 }
 ```
 
 Returns:
 ```json
 {
-  "predicted_sentiment": 0    # predicted as non-toxic comment
+  "predicted_status": 0    # predicted as non-toxic comment
 }
 ```
 
