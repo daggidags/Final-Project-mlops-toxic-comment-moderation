@@ -1,24 +1,33 @@
-# src/api.py
-from fastapi import FastAPI
-from pydantic import BaseModel
-import mlflow.pyfunc
-import pandas as pd
+import streamlit as st
+import requests
 
-app = FastAPI()
+API_URL = "http://localhost:8000/predict"
 
-model_name = "ToxicCommentModel"
-model_stage = "None"  # or "Staging" or "Production"
-model = mlflow.pyfunc.load_model(model_uri=f"models:/{model_name}/{model_stage}")
+# Streamlit app
+st.set_page_config(page_title="Toxic Comment Moderation", page_icon="🧠", layout="centered")
 
-class CommentInput(BaseModel):
-    comment_text: str
+st.title("Toxic Comment Moderation Dashboard")
+st.write("Enter a comment below to classify whether it is toxic or safe.")
 
-@app.get("/health")
-def health_check():
-    return {"status": "ok"}
+# Input field
+user_input = st.text_area("Enter your comment:", height=150)
 
-@app.post("/predict")
-def predict(input_data: CommentInput):
-    input_df = pd.DataFrame({"comment_text": [input_data.comment_text]})
-    prediction = model.predict(input_df)[0]
-    return {"toxic": bool(prediction)}
+# Submit button
+if st.button("Predict"):
+    if not user_input.strip():
+        st.warning("Please enter a comment first.")
+    else:
+        # Send request to FastAPI
+        try:
+            payload = {"text": user_input, "true_label": None}  # No label yet for user predictions
+            response = requests.post(API_URL, json=payload)
+
+            if response.status_code == 200:
+                prediction = response.json()
+                st.success(f"**Prediction:** {prediction}")
+
+            else:
+                st.error(f"Error {response.status_code}: {response.text}")
+
+        except requests.exceptions.ConnectionError:
+            st.error("Unable to connect to FastAPI backend. Is it running?")

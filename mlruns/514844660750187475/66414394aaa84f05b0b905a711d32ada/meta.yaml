@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/66414394aaa84f05b0b905a711d32ada/artifacts
+end_time: 1756168769263
+entry_point_name: ''
+experiment_id: '514844660750187475'
+lifecycle_stage: active
+run_id: 66414394aaa84f05b0b905a711d32ada
+run_name: charming-donkey-225
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756168753799
+status: 4
+tags: []
+user_id: angel

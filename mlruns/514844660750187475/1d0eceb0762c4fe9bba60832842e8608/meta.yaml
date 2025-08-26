@@ -1,8 +1,9 @@
 artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/1d0eceb0762c4fe9bba60832842e8608/artifacts
+deleted_time: 1756168560387
 end_time: 1755987533279
 entry_point_name: ''
 experiment_id: '514844660750187475'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 1d0eceb0762c4fe9bba60832842e8608
 run_name: classy-zebra-92
 source_name: ''

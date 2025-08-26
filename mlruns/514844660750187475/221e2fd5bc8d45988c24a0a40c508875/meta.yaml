@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/221e2fd5bc8d45988c24a0a40c508875/artifacts
+end_time: 1756168316510
+entry_point_name: ''
+experiment_id: '514844660750187475'
+lifecycle_stage: active
+run_id: 221e2fd5bc8d45988c24a0a40c508875
+run_name: adventurous-ant-360
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756168293757
+status: 3
+tags: []
+user_id: angel

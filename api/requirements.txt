@@ -3,7 +3,8 @@ pydantic
 uvicorn[standard]
 joblib
 pandas
-scikit-learn
+scikit-learn==1.4.1.post1
 mlflow
 streamlit
 pytest
+psycopg2-binary>=2.9.9

@@ -1,0 +1,22 @@
+artifact_path: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/models/m-2c5332fc52d14de794c68a0956a30da3/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.pkl
+    predict_fn: predict
+    python_version: 3.11.9
+  sklearn:
+    code: null
+    pickled_model: model.pkl
+    serialization_format: cloudpickle
+    sklearn_version: 1.4.1.post1
+mlflow_version: 3.3.0
+model_id: m-2c5332fc52d14de794c68a0956a30da3
+model_size_bytes: 2218643
+model_uuid: m-2c5332fc52d14de794c68a0956a30da3
+prompts: null
+run_id: ccc3043876614f73afb7740a4a157dd9
+utc_time_created: '2025-08-26 00:45:44.269105'

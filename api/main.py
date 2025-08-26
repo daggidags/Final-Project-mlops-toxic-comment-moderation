@@ -1,54 +1,71 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import joblib
-from pathlib import Path
+import psycopg2
+from psycopg2.extras import RealDictCursor
 import os
-import json
 from datetime import datetime
+from typing import Optional
 
-# Initialize FastAPI app
-app = FastAPI(
-    title="Toxic Comment Classification API",
-    description="Classifies user comments as toxic or non-toxic and logs results for monitoring",
-    version="1.0"
-)
+app = FastAPI()
 
-# Load trained model
-model_path = Path(__file__).resolve().parent / "toxicity_model.pkl"
-if not model_path.exists():
-    raise FileNotFoundError(f"Model file not found: {model_path}")
-model = joblib.load(model_path)
+# Load sentiment model
+model = joblib.load("toxicity_model.pkl")
 
-# Define input format
-class PredictionInput(BaseModel):
-    text: str
-    true_label: str  # optional, for logging and monitoring
+# Database connection settings
+DB_HOST = os.getenv("DB_HOST", "toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com")
+DB_NAME = os.getenv("DB_NAME", "postgres")
+DB_USER = os.getenv("DB_USER", "postgres")
+DB_PASS = os.getenv("DB_PASS", "finalproject")
+DB_PORT = 5432
 
-# Health check endpoint
+def get_db_connection():
+    return psycopg2.connect(
+        host=DB_HOST,
+        database=DB_NAME,
+        user=DB_USER,
+        password=DB_PASS,
+        port=DB_PORT,
+        cursor_factory=RealDictCursor
+    )
+
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
 
-# Predict toxicity endpoint
+# Prediction input model
+class PredictionInput(BaseModel):
+    text: str
+    true_label: Optional[int] = None
+
 @app.post("/predict")
 def predict_toxicity(input: PredictionInput):
     try:
-        prediction = model.predict([input.text])[0]
+        # Make prediction and convert to native Python int
+        prediction = int(model.predict([input.text])[0])
+
+        # Create database connection
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Insert log entry (convert true_label too)
+        cursor.execute("""
+            INSERT INTO prediction_logs (timestamp, request_text, predicted_label, true_label)
+            VALUES (%s, %s, %s, %s)
+        """, (
+            datetime.utcnow(),
+            input.text,
+            prediction,
+            int(input.true_label) if input.true_label is not None else None
+        ))
+
+        conn.commit()
+        cursor.close()
+        conn.close()
+
+        # Return JSON-safe response
+        return {"predicted_label": prediction}
+
     except Exception as e:
+        print(f"Failed to log prediction: {e}")
         raise HTTPException(status_code=500, detail=str(e))
-
-    # Create logs directory if it doesn’t exist
-    os.makedirs("/logs", exist_ok=True)
-
-    # Log prediction data for monitoring
-    log_entry = {
-        "timestamp": datetime.utcnow().isoformat(),
-        "request_text": input.text,
-        "true_label": input.true_label,
-        "predicted_label": int(prediction)
-    }
-
-    with open("/logs/prediction_logs.json", "a") as f:
-        f.write(json.dumps(log_entry) + "\n")
-
-    return {"predicted_label": int(prediction)}

@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/models/m-98c8e60a9e334b1687d9368f43fcdc77/artifacts
+creation_timestamp: 1756169586519
+experiment_id: '514844660750187475'
+last_updated_timestamp: 1756169591418
+model_id: m-98c8e60a9e334b1687d9368f43fcdc77
+model_type: null
+name: model_pipeline1
+source_run_id: 867cead872574e4090419597a42135c5
+status: 2
+status_message: null

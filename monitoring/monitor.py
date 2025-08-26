@@ -8,7 +8,6 @@ from datetime import datetime
 LOGS_PATH = "/logs/prediction_logs.json"
 
 st.set_page_config(page_title="Toxicity Model Monitor", layout="wide")
-
 st.title("Toxicity Model Monitoring Dashboard")
 st.markdown("This dashboard visualizes predictions and tracks model performance in real-time.")
 
@@ -29,39 +28,47 @@ else:
         st.info("No prediction data available yet.")
     else:
         df = pd.DataFrame(logs)
-
-        # Convert timestamps
         df["timestamp"] = pd.to_datetime(df["timestamp"])
 
-        # Sidebar filters
         st.sidebar.header("Filters")
-        sentiment_filter = st.sidebar.multiselect(
-            "Filter by Predicted Sentiment:",
-            options=df["predicted_sentiment"].unique(),
-            default=list(df["predicted_sentiment"].unique())
-        )
 
-        df_filtered = df[df["predicted_sentiment"].isin(sentiment_filter)]
+        if "predicted_sentiment" in df.columns:
+            sentiment_filter = st.sidebar.multiselect(
+                "Filter by Predicted Sentiment:",
+                options=df["predicted_sentiment"].dropna().unique(),
+                default=list(df["predicted_sentiment"].dropna().unique())
+            )
 
-        # Show latest predictions
-        st.subheader("Recent Predictions")
-        st.dataframe(df_filtered.sort_values("timestamp", ascending=False).tail(10))
+            df_filtered = df[df["predicted_sentiment"].isin(sentiment_filter)]
 
-        # Plot prediction counts
-        st.subheader("Predictions Over Time")
-        chart_df = df_filtered.groupby([df_filtered["timestamp"].dt.date, "predicted_sentiment"]).size().reset_index(name="count")
-        chart_df.rename(columns={"timestamp": "date"}, inplace=True)
-        st.line_chart(chart_df.pivot(index="date", columns="predicted_sentiment", values="count").fillna(0))
+            # Show latest predictions
+            st.subheader("Recent Predictions")
+            st.dataframe(df_filtered.sort_values("timestamp", ascending=False).tail(10))
 
-        # Compare predicted vs true sentiment
-        if "true_sentiment" in df_filtered.columns and df_filtered["true_sentiment"].notna().any():
-            st.subheader("Prediction Accuracy")
-            accuracy = (df_filtered["predicted_sentiment"] == df_filtered["true_sentiment"]).mean() * 100
-            st.metric("Model Accuracy", f"{accuracy:.2f}%")
+            # Plot prediction counts
+            st.subheader("Predictions Over Time")
+            chart_df = (
+                df_filtered
+                .groupby([df_filtered["timestamp"].dt.date, "predicted_sentiment"])
+                .size()
+                .reset_index(name="count")
+                .rename(columns={"timestamp": "date"})
+            )
+            st.line_chart(
+                chart_df.pivot(index="date", columns="predicted_sentiment", values="count").fillna(0)
+            )
 
-            confusion = pd.crosstab(df_filtered["true_sentiment"], df_filtered["predicted_sentiment"])
-            st.write("Confusion Matrix")
-            st.dataframe(confusion)
+            # Compare predicted vs true sentiment
+            if "true_sentiment" in df_filtered.columns and df_filtered["true_sentiment"].notna().any():
+                st.subheader("Prediction Accuracy")
+                accuracy = (df_filtered["predicted_sentiment"] == df_filtered["true_sentiment"]).mean() * 100
+                st.metric("Model Accuracy", f"{accuracy:.2f}%")
+
+                confusion = pd.crosstab(df_filtered["true_sentiment"], df_filtered["predicted_sentiment"])
+                st.write("Confusion Matrix")
+                st.dataframe(confusion)
+        else:
+            st.warning("No 'predicted_sentiment' data found in logs yet. Make some predictions via the API or frontend.")
 
 st.markdown("---")
 st.caption("Toxicity Model Monitoring Dashboard — Powered by Streamlit")

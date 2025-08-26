@@ -1,8 +1,9 @@
 artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/778009190cb04c5f8685c3d81763bbf0/artifacts
+deleted_time: 1756168560387
 end_time: 1755988482080
 entry_point_name: ''
 experiment_id: '514844660750187475'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 778009190cb04c5f8685c3d81763bbf0
 run_name: powerful-deer-443
 source_name: ''

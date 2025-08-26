@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/99d7c269947a4f19a98f80593405c1b9/artifacts
+end_time: 1756168911907
+entry_point_name: ''
+experiment_id: '514844660750187475'
+lifecycle_stage: active
+run_id: 99d7c269947a4f19a98f80593405c1b9
+run_name: clumsy-foal-334
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756168896997
+status: 4
+tags: []
+user_id: angel

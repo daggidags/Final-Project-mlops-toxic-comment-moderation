@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/ad3bdb71ee844dc886ae9d668f6b03ad/artifacts
+end_time: 1756169332950
+entry_point_name: ''
+experiment_id: '514844660750187475'
+lifecycle_stage: active
+run_id: ad3bdb71ee844dc886ae9d668f6b03ad
+run_name: Pipeline2-L2-Regularization
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1756169319265
+status: 3
+tags: []
+user_id: angel

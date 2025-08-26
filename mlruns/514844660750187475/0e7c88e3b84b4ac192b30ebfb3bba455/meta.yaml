@@ -1,8 +1,9 @@
 artifact_uri: file:///C:/Users/angel/OneDrive/Desktop/DU/Advanced_Topics/Final_Project_Build_Production_Grade_MLOps_System/mlruns/514844660750187475/0e7c88e3b84b4ac192b30ebfb3bba455/artifacts
+deleted_time: 1756168560391
 end_time: 1755985556030
 entry_point_name: ''
 experiment_id: '514844660750187475'
-lifecycle_stage: active
+lifecycle_stage: deleted
 run_id: 0e7c88e3b84b4ac192b30ebfb3bba455
 run_name: charming-eel-669
 source_name: ''
