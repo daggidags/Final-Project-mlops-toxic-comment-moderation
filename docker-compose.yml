@@ -2,8 +2,8 @@
 services:
   fastapi:
     build:
-      context: .
-      dockerfile: api/Dockerfile
+      context: ./api
+      dockerfile: Dockerfile
     container_name: toxicity_fastapi
     ports:
       - "8000:8000"
@@ -14,8 +14,8 @@ services:
 
   monitoring:
     build:
-      context: .
-      dockerfile: monitoring/Dockerfile
+      context: ./monitoring
+      dockerfile: Dockerfile
     container_name: toxicity_monitoring
     ports:
       - "8501:8501"
