@@ -6,10 +6,11 @@ toxic comment moderation. This mult-component application includes:
 Unordered sub-list.
 - Experiment Tracking & Model Registry: A system to log experiment parameters/metrics and manage model versions
 - ML Model Backend: A `FastAPI` application to serve your registered model
-       - Persistent Data Store: A cloud-native base SQL for storing logs and feedback
-       - Frontend Interface: A `Streamlit` application for interacting wth the model
-       - Model monitoring Dashboard: to detect latency, target drift, user feedback on predictions to calculate accuracy
-       - CI/CD Pipeline: An automated workflow to test and validate code changes
+- Persistent Data Store: A cloud-native base SQL for storing logs and feedback
+- Frontend Interface: A `Streamlit` application for interacting wth the model
+- Model monitoring Dashboard: to detect latency, target drift, user feedback on predictions to calculate accuracy
+- CI/CD Pipeline: An automated workflow to test and validate code changes
+- Unit Tests: for both API and monitoring dashboard
 
 ## Project Structure
 
@@ -82,6 +83,18 @@ Returns:
 
 Once running, access the UI at: http://<your_public_ip>:8000 and http://<your_public_ip>:8501
 
+## How to Run Locally with Docker
+1. Build Countainers and Start the System
+   ```bash
+       docker build -t toxicapi ./api
+       docker build -t monitordash ./monitoring
+   ```
+2. Access the Applications
+
+FastAPI API Docs → http://localhost:8000/docs
+
+Streamlit Dashboard → http://localhost:8501
+
 ### Hosting on AWS EC2 
 
 This project has also been connected to an **AWS EC2 instance**.
@@ -97,12 +110,17 @@ This project has also been connected to an **AWS EC2 instance**.
 
 4. **Clone the repo and navigate into the directory**:
    ```bash
-   git clone https://github.com/daggidags/Final-Project-mlops-toxic-comment-moderation.git
+   git clone https://github.com/<your-username>/<your-repo>.git
    cd Final-Project-mlops-toxic-comment-moderation
    ```
-5. Build the Containers
+5. **Build and Start the Containers**
 
    ```bash
    docker-compose build --no-cache
    docker-compose up -d
    ```
+6. **Access the Applications:**
+
+*FastAPI* → http://<ec2-public-ip>:8000/docs
+
+*Streamlit Dashboard* → http://<ec2-public-ip>:8501
