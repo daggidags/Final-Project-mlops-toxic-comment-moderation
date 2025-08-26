@@ -83,18 +83,6 @@ Returns:
 
 Once running, access the UI at: http://<your_public_ip>:8000 and http://<your_public_ip>:8501
 
-## How to Run Locally with Docker
-1. Build Countainers and Start the System
-   ```bash
-       docker build -t toxicapi ./api
-       docker build -t monitordash ./monitoring
-   ```
-2. Access the Applications
-
-FastAPI API Docs → http://localhost:8000/docs
-
-Streamlit Dashboard → http://localhost:8501
-
 ### Hosting on AWS EC2 
 
 This project has also been connected to an **AWS EC2 instance** and **AWS RDS Database**.
@@ -129,8 +117,9 @@ This project has also been connected to an **AWS EC2 instance** and **AWS RDS Da
   psql -h toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com -U postgres -p 5432
    ```
 8. **Access the EC2 instance in Bash**
+
    ```bash
-  ssh-keygen -t rsa -b 4096 -C "github-actions"
-  scp -i toxicity-key.pem -r ~/ ec2-user@44.210.126.9:/home/ec2-user/
+   ssh-keygen -t rsa -b 4096 -C "github-actions"
+   scp -i toxicity-key.pem -r ~/ ec2-user@44.210.126.9:/home/ec2-user/
    ```
 
