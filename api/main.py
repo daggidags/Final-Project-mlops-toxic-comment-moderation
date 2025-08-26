@@ -2,70 +2,54 @@ from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 import joblib
 import psycopg2
-from psycopg2.extras import RealDictCursor
-import os
 from datetime import datetime
-from typing import Optional
+import os
 
 app = FastAPI()
 
 # Load sentiment model
-model = joblib.load("toxicity_model.pkl")
+MODEL_PATH = os.path.join(os.path.dirname(__file__), "toxicity_model.pkl")
+model = joblib.load(MODEL_PATH)
 
-# Database connection settings
-DB_HOST = os.getenv("DB_HOST", "toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com")
-DB_NAME = os.getenv("DB_NAME", "postgres")
-DB_USER = os.getenv("DB_USER", "postgres")
-DB_PASS = os.getenv("DB_PASS", "finalproject")
-DB_PORT = 5432
+# Define input data model
+class PredictionInput(BaseModel):
+    text: str
+    true_label: int
 
+# Database connection
 def get_db_connection():
     return psycopg2.connect(
-        host=DB_HOST,
-        database=DB_NAME,
-        user=DB_USER,
-        password=DB_PASS,
-        port=DB_PORT,
-        cursor_factory=RealDictCursor
+        host=os.getenv("DB_HOST", "toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com"),
+        port=os.getenv("DB_PORT", "5432"),
+        user=os.getenv("DB_USER", "postgres"),
+        password=os.getenv("DB_PASSWORD", "finalproject"),
+        dbname=os.getenv("DB_NAME", "postgres")
     )
 
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
 
-# Prediction input model
-class PredictionInput(BaseModel):
-    text: str
-    true_label: Optional[int] = None
-
 @app.post("/predict")
-def predict_toxicity(input: PredictionInput):
+def predict_sentiment(input: PredictionInput):
     try:
-        # Make prediction and convert to native Python int
-        prediction = int(model.predict([input.text])[0])
+        prediction = model.predict([input.text])[0]
+        prediction = int(prediction)  # <-- Fix numpy.int64 issue
 
-        # Create database connection
+        # Log prediction to RDS
         conn = get_db_connection()
-        cursor = conn.cursor()
+        cur = conn.cursor()
 
-        # Insert log entry (convert true_label too)
-        cursor.execute("""
+        cur.execute("""
             INSERT INTO prediction_logs (timestamp, request_text, predicted_label, true_label)
-            VALUES (%s, %s, %s, %s)
-        """, (
-            datetime.utcnow(),
-            input.text,
-            prediction,
-            int(input.true_label) if input.true_label is not None else None
-        ))
+            VALUES (%s, %s, %s, %s);
+        """, (datetime.utcnow(), input.text, int(prediction), input.true_label))
 
         conn.commit()
-        cursor.close()
+        cur.close()
         conn.close()
 
-        # Return JSON-safe response
-        return {"predicted_label": prediction}
+        return {"text": input.text, "predicted_label": prediction}
 
     except Exception as e:
-        print(f"Failed to log prediction: {e}")
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
