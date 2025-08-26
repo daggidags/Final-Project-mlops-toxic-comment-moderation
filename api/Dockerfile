@@ -8,8 +8,8 @@ ENV PYTHONUNBUFFERED=1
 # Set working directory inside container
 WORKDIR /api
 
-# Copy requirements.txt from ROOT project folder, not api/
-COPY ../requirements.txt ./requirements.txt
+# Copy requirements.txt from project ROOT into /api
+COPY ./requirements.txt ./requirements.txt
 
 # Install dependencies
 RUN pip install --no-cache-dir --upgrade pip && \

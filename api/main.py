@@ -34,7 +34,7 @@ def health_check():
 def predict_sentiment(input: PredictionInput):
     try:
         prediction = model.predict([input.text])[0]
-        prediction = int(prediction)  # <-- Fix numpy.int64 issue
+        prediction = int(prediction)  
 
         # Log prediction to RDS
         conn = get_db_connection()
