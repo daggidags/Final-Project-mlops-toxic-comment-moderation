@@ -4,7 +4,7 @@ This project is a production-grade MLOps system. This end-to-end machine learnin
 model experimentation, versioning, automated testing, deployment on AWS, and live monitoring for
 toxic comment moderation. This mult-component application includes:  
 Unordered sub-list.
-- Experiment Tracking & Model Registry: A system to log experiment parameters/metrics and manage model versions
+- Experiment Tracking & Model Registry: A system to log experiment parameters/metrics and manage model versions using MLFlow. Accuracy and F1 scores are used to evaluate the three models (ToxicCommentModel, ToxicCommentModel_v1, and ToxicCommentModel_v2)
 - ML Model Backend: A `FastAPI` application to serve your registered model
 - Persistent Data Store: A cloud-native base SQL for storing logs and feedback
 - Frontend Interface: A `Streamlit` application for interacting wth the model
@@ -72,42 +72,42 @@ Returns:
 }
 ```
 
-### Running the System with Docker
-
- Build the Containers
-
-   ```bash
-   docker-compose build --no-cache
-   docker-compose up -d
-   ```
-
-Once running, access the UI at: http://<your_public_ip>:8000 and http://<your_public_ip>:8501
-
 ### Hosting on AWS EC2 
 
-This project has also been connected to an **AWS EC2 instance** and **AWS RDS Database**.
+This project has been connected to an **AWS EC2 instance** and **AWS RDS Database**.
 
 #### Steps to Deploy:
 
-1. **Launch an EC2 instance** (e.g., Ubuntu).
-2. **Add Security Groups** for ports `8000` and `8501` in your EC2 Security Group.
-3. **SSH into your instance**:
+1. **Runs Models and the MLFlow UI**
+   
+   ```bash
+   python src/train.py 
+   python -m mlflow ui
+   ```
+   Open MLFlow → http://127.0.0.1:5000/#/experiments
+
+   <img width="1190" height="606" alt="image" src="https://github.com/user-attachments/assets/5e14bb85-ba21-4193-a326-37ed5544bd67" />
+
+
+3. **Launch an EC2 instance** (e.g., Ubuntu).
+4. **Add Security Groups** for ports `8000` and `8501` in your EC2 Security Group.
+5. **SSH into your instance**:
    ```bash
    ssh -i /path/to/your-key.pem ubuntu@<your-ec2-public-ip>
    ```
 
-4. **Clone the repo and navigate into the directory**:
+6. **Clone the repo and navigate into the directory**:
    ```bash
    git clone https://github.com/<your-username>/<your-repo>.git
    cd Final-Project-mlops-toxic-comment-moderation
    ```
-5. **Build and Start the Containers**
+7. **Build and Start the Containers**
 
    ```bash
    docker-compose build --no-cache
    docker-compose up -d
    ```
-6. **Access the Applications:**
+8. **Access the Applications:**
 
 *FastAPI* → http://<ec2-public-ip>:8000/docs
 
