@@ -89,31 +89,31 @@ This project has been connected to an **AWS EC2 instance** and **AWS RDS Databas
    <img width="1190" height="606" alt="image" src="https://github.com/user-attachments/assets/5e14bb85-ba21-4193-a326-37ed5544bd67" />
 
 
-3. **Launch an EC2 instance** (e.g., Ubuntu).
-4. **Add Security Groups** for ports `8000` and `8501` in your EC2 Security Group.
-5. **SSH into your instance**:
+2. **Launch an EC2 instance** (e.g., Ubuntu).
+3. **Add Security Groups** for ports `8000` and `8501` in your EC2 Security Group.
+4. **SSH into your instance**:
    ```bash
    ssh -i /path/to/your-key.pem ubuntu@<your-ec2-public-ip>
    ```
 
-6. **Clone the repo and navigate into the directory**:
+5. **Clone the repo and navigate into the directory**:
    ```bash
    git clone https://github.com/<your-username>/<your-repo>.git
    cd Final-Project-mlops-toxic-comment-moderation
    ```
-7. **Build and Start the Containers**
+6. **Build and Start the Containers**
 
    ```bash
    docker-compose build --no-cache
    docker-compose up -d
    ```
-8. **Access the Applications:**
+7. **Access the Applications:**
 
 *FastAPI* → http://<ec2-public-ip>:8000/docs
 
 *Streamlit Dashboard* → http://<ec2-public-ip>:8501
 
-7. **Access the AWS RDS Database**
+8. **Access the AWS RDS Database**
    
    ```bash
    psql -h toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com -U postgres -p 5432
