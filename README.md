@@ -114,10 +114,12 @@ This project has also been connected to an **AWS EC2 instance** and **AWS RDS Da
 *Streamlit Dashboard* → http://<ec2-public-ip>:8501
 
 7. **Access the AWS RDS Database**
+   
    ```bash
-  psql -h toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com -U postgres -p 5432
+   psql -h toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com -U postgres -p 5432
    ```
-8. **Access the EC2 instance in Bash**
+
+9. **Access the EC2 instance in Bash**
 
    ```bash
    ssh-keygen -t rsa -b 4096 -C "github-actions"
