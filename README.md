@@ -112,6 +112,7 @@ This project has also been connected to an **AWS EC2 instance** and **AWS RDS Da
 *FastAPI* → http://<ec2-public-ip>:8000/docs
 
 *Streamlit Dashboard* → http://<ec2-public-ip>:8501
+
 7. **Access the AWS RDS Database**
    ```bash
   psql -h toxicity-db.cdowqssegxo6.us-east-1.rds.amazonaws.com -U postgres -p 5432
